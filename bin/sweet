@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+require File.dirname(__FILE__) + "/../lib/sweet_generator/sweet_generator"
+
+unless ARGV[0]
+  puts "You must provide a name for your test sweet"
+  exit
+end
+
+generator = TestSweet::SweetGenerator.new(ARGV[0])
+generator.generate_app
