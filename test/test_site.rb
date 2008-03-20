@@ -36,18 +36,6 @@ class TestSite < Test::Unit::TestCase
     assert_equal :test, FooSite.new.return_me(:test)
   end
   
-  def test_start_browser
-    FooSite.any_instance.stubs(:load_pages)
-    FooSite.any_instance.stubs(:load_flows)
-    FooSite.any_instance.stubs(:load_config)
-    
-    foo = FooSite.new
-    foo.instance_variable_set("@environment",{'url' => 'test'})
-    foo.start_browser
-    
-    assert_equal 'test', foo.browser.url
-  end
-  
   def test_load_pages
     FooSite.any_instance.stubs(:load_flows)
     FooSite.any_instance.stubs(:load_config)
@@ -103,5 +91,15 @@ class TestSite < Test::Unit::TestCase
   
   def test_block_chainable_is_extended_when_site_is_inherited
     assert(FooSite.included_modules.include?(BlockChainable))
+  end
+  
+  def test_site_within_site_gets_parents_browser
+    FooSite do
+      @browser = :test
+      
+      FooSite do
+        assert_equal :test, browser
+      end
+    end
   end
 end

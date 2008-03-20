@@ -10,14 +10,14 @@ module TestSweet
       @site, @name = args
 
       unless @site && @name
-        raise ArgumentError, "you must provide a site and a page"
+        raise ArgumentError, 'you must provide a site and a page'
       end
     end
     
     def generate
       file_dir = File.expand_path(File.dirname(__FILE__))
       
-      page_dir = File.join(file_dir,"..","..","pages","#{Inflector.underscore(@site)}")
+      page_dir = File.join(file_dir,'..','..','pages',"#{Inflector.underscore(@site)}")
 
       unless File.exist? page_dir
         raise ArgumentError, "#{@site} is not a valid site"

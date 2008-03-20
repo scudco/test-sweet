@@ -5,7 +5,7 @@ require 'active_support/inflector'
 
 module TestSweet
   class Site
-    attr_reader :browser, :environment
+    attr_reader :environment
     
     def self.inherited klass
       klass.class_eval do
@@ -15,11 +15,7 @@ module TestSweet
   
     def self.flow name,&block
       self.class_eval do
-        define_method(name) do |*args|
-          self.instance_eval do
-            block.call(*args)
-          end
-        end
+        define_method(name,&block)
       end
     end
   
@@ -29,10 +25,24 @@ module TestSweet
       load_config
     end
     
-    def start_browser
-      # impelement this line to instantiate your browser object and start it
-      # using the url provided by @enviornment
-      @browser = Struct.new(:url).new(@environment['url'])
+    def browser
+      if !(@browser ||= nil) && @__parent && @__parent.respond_to?(:browser)
+        @browser = @__parent.browser
+      end
+      
+      @browser
+    end
+    
+    def browser=(val)
+      if @__parent && !@__parent.respond_to?(:browser)
+        class << @__parent
+          define_method(:browser) do
+            val
+          end
+        end
+      end
+      
+      @browser = val
     end
     
     private

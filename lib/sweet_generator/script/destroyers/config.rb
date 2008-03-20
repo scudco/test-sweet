@@ -9,14 +9,14 @@ module TestSweet
       @site,@name = args
       
       unless @site && @name
-        raise ArgumentError, "you must provide a site and a name"
+        raise ArgumentError, 'you must provide a site and a name'
       end
     end
     
     def destroy
-      config_file = File.join(File.dirname(__FILE__),"..","..","config",Inflector.underscore(@site),"#{@name}.yaml")
+      config_file = File.join(File.dirname(__FILE__),'..','..','config',Inflector.underscore(@site),"#{@name}.yaml")
       unless File.exists? config_file
-        raise ArgumentError, "config specified does not exist"
+        raise ArgumentError, 'config specified does not exist'
       end
       remove_file config_file
     end

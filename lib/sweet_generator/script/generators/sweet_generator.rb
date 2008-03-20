@@ -4,7 +4,7 @@ module TestSweet
   class SweetGenerator
     def add_file file_name, contents
       alert_added file_name
-      File.open(file_name,"w") do |out|
+      File.open(file_name,'w') do |out|
         out << contents
       end
     end

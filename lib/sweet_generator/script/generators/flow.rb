@@ -3,7 +3,7 @@ require 'rubygems'
 require 'active_support/inflector'
 require 'need'
 require 'fileutils'
-need{"sweet_generator"}
+need{'sweet_generator'}
 
 module TestSweet
   class FlowGenerator < SweetGenerator
@@ -11,17 +11,17 @@ module TestSweet
       @site, @name = args
 
       unless @site && @name
-        raise ArgumentError, "please provide a site and flow name"
+        raise ArgumentError, 'please provide a site and flow name'
       end
     end
     
     def generate
       file_dir = File.expand_path(File.dirname(__FILE__))
 
-      flow_dir = File.join(file_dir,"..","..","flows",Inflector.underscore(@site))
+      flow_dir = File.join(file_dir,'..','..','flows',Inflector.underscore(@site))
 
       unless File.exist? flow_dir
-        raise ArgumentError, "site specified does not exist"
+        raise ArgumentError, 'site specified does not exist'
       end
 
       flow_file = File.join(flow_dir,"#{Inflector.underscore(@name)}.rb")

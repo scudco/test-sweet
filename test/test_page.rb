@@ -18,6 +18,14 @@ class SomePage < TestSweet::Page
     :test_false
   end
   
+  element :return_me do |val|
+    val
+  end
+  
+  element :call_helper do
+    helper
+  end
+  
   filter :a, :b do
     "foo"
   end
@@ -32,6 +40,10 @@ class SomePage < TestSweet::Page
   
   filter :test_false do
     false
+  end
+  
+  def helper
+    :helper
   end
 end
 
@@ -98,5 +110,13 @@ class TestPage < Test::Unit::TestCase
     assert_raises NoMethodError do
       SomePage.new.bad_method
     end
+  end
+  
+  def test_element_with_arguments
+    assert_equal :test, SomePage.new.return_me(:test)
+  end
+  
+  def test_element_with_instance_binding
+    assert_equal :helper, SomePage.new.call_helper
   end
 end

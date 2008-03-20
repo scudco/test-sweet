@@ -2,7 +2,7 @@ require 'rubygems'
 require 'active_support/inflector'
 require 'need'
 require 'yaml'
-need{"sweet_generator"}
+need{'sweet_generator'}
 
 module TestSweet
   class ConfigGenerator < SweetGenerator
@@ -10,14 +10,14 @@ module TestSweet
       @site,@name = args
       
       unless @site && @name
-        raise ArgumentError, "please provide a site and config name"
+        raise ArgumentError, 'please provide a site and config name'
       end
     end
     
     def generate
       file_dir = File.expand_path(File.dirname(__FILE__))
 
-      config_dir = File.join(file_dir,"..","..","config",Inflector.underscore(@site))
+      config_dir = File.join(file_dir,'..','..','config',Inflector.underscore(@site))
       
       unless File.exist? config_dir
         raise ArgumentError, "site #{@blah} does not exist"

@@ -3,11 +3,11 @@ require 'rubygems'
 require 'active_support/inflector'
 
 unless action = ARGV[0]
-  puts "you must provide an argument to destroy"
+  puts 'you must provide an argument to destroy'
   exit
 end
 
-unless File.exist?(destroyer_file = File.join(File.dirname(__FILE__),"destroyers","#{action}.rb"))
+unless File.exist?(destroyer_file = File.join(File.dirname(__FILE__),'destroyers',"#{action}.rb"))
   puts "the action #{action} is not a valid destroy option"
   exit
 end

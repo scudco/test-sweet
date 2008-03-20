@@ -10,17 +10,17 @@ module TestSweet
       @site, @name = args
 
       unless @site && @name
-        raise ArgumentError, "you must specify a site and name"
+        raise ArgumentError, 'you must specify a site and name'
       end
     end
     
     def generate
       file_dir = File.expand_path(File.dirname(__FILE__))
 
-      test_dir = File.join(file_dir,"..","..","next_release",@site)
+      test_dir = File.join(file_dir,'..','..','next_release',@site)
 
       unless File.exist? test_dir
-        raise ArgumentError, "the specified site does not exist"
+        raise ArgumentError, 'the specified site does not exist'
       end
 
       test_file = File.join(test_dir,"test_#{@name}.rb")

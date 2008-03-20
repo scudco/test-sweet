@@ -11,24 +11,29 @@ module TestSweet
       end
     end
   
+    def initialize
+      # build methods for elements
+      self.class.elements.each do |element,block|
+        self.class.class_eval do
+          define_method("__#{element}_block",&block)
+          
+          define_method(element) do |*args|
+            if (self.class.filters[element].to_a + self.class.filters[:all].to_a).all?{|filter| instance_eval(&filter)}
+              self.send("__#{element}_block",*args)
+            else
+              raise FilterError, "All filters for #{element} did not return true"
+            end
+          end
+        end
+      end
+    end
+  
     def browser
       @browser ||= @__parent.browser
     end
     
     def environment
       @environment ||= @__parent.environment
-    end
-    
-    def method_missing name,*args
-      if self.class.elements.include? name
-        if (self.class.filters[name].to_a + self.class.filters[:all].to_a).all?{|filter| instance_eval(&filter)}
-          self.class.elements[name].call(*args)
-        else
-          raise FilterError, "All filters for #{name} did not return true"
-        end
-      else
-        super
-      end
     end
     
     def self.filter *args,&block

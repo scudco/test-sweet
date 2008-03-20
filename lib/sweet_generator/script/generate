@@ -3,11 +3,11 @@ require 'rubygems'
 require 'active_support/inflector'
 
 unless action = ARGV[0]
-  puts "you must provide an argument to generate"
+  puts 'you must provide an argument to generate'
   exit
 end
 
-unless File.exist?(generator_file = File.join(File.dirname(__FILE__),"generators","#{action}.rb"))
+unless File.exist?(generator_file = File.join(File.dirname(__FILE__),'generators',"#{action}.rb"))
   puts "the action #{action} is not a valid generate option"
   exit
 end

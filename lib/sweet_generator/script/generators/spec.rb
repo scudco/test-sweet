@@ -2,7 +2,7 @@
 require 'rubygems'
 require 'need'
 require 'active_support/inflector'
-need{"sweet_generator"}
+need{'sweet_generator'}
 
 module TestSweet
   class SpecGenerator < SweetGenerator
@@ -10,17 +10,17 @@ module TestSweet
       @site, @name = args
 
       unless @site && @name
-        raise ArgumentError, "you must specify a site and name"
+        raise ArgumentError, 'you must specify a site and name'
       end
     end
     
     def generate
       file_dir = File.expand_path(File.dirname(__FILE__))
 
-      spec_dir = File.join(file_dir,"..","..","next_release",@site)
+      spec_dir = File.join(file_dir,'..','..','next_release',@site)
 
       unless File.exist? spec_dir
-        raise ArgumentError, "the specified site does not exist"
+        raise ArgumentError, 'the specified site does not exist'
       end
 
       spec_file = File.join(spec_dir,"#{@name}_spec.rb")

@@ -2,7 +2,7 @@ require 'fileutils'
 
 module TestSweet
   class SweetGenerator
-    CURRENT_DIR = File.expand_path(".")
+    CURRENT_DIR = File.expand_path('.')
     
     APP_SKELETON = %w(
       config
@@ -18,8 +18,8 @@ module TestSweet
     )
     
     FILE_MAPPING = {
-      "rakefile.rb" => "rakefile.rb",
-      "application.rb" => File.join("lib","application.rb")
+      'rakefile.rb' => 'rakefile.rb',
+      'application.rb' => File.join('lib','application.rb')
     }
     
     def initialize name
@@ -55,9 +55,9 @@ module TestSweet
     end
     
     def copy_scripts
-      FileUtils.cp_r(File.join(File.dirname(__FILE__),"script","."),File.join(@app_root,"script"))
+      FileUtils.cp_r(File.join(File.dirname(__FILE__),'script','.'),File.join(@app_root,'script'))
       
-      Dir.glob(File.join(@app_root,"script","**","**")) do |file|
+      Dir.glob(File.join(@app_root,'script','**','**')) do |file|
         puts "creating file: #{File.expand_path(file)}"
         FileUtils.chmod(0755, file)
       end
@@ -69,7 +69,7 @@ module TestSweet
     end
     
     def copy_file source,destination
-      files_dir = File.join(File.dirname(__FILE__),"files")
+      files_dir = File.join(File.dirname(__FILE__),'files')
       
       puts "creating file: #{File.join(@app_root,destination)}"
       FileUtils.cp(File.join(files_dir,source),File.join(@app_root,destination))
