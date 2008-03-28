@@ -1,3 +1,7 @@
+require 'rubygems'
+gem 'ci_reporter'
+require 'ci/reporter/rake/rspec'
+require 'ci/reporter/rake/test_unit'
 require 'rake/testtask'
 require 'spec/rake/spectask'
 require 'fileutils'

@@ -5,18 +5,12 @@ require 'active_support/inflector'
 
 module TestSweet
   class Site
-    attr_reader :environment
+    include BlockChainable
     
-    def self.inherited klass
-      klass.class_eval do
-        include BlockChainable
-      end
-    end
-  
+    attr_reader :environment
+
     def self.flow name,&block
-      self.class_eval do
-        define_method(name,&block)
-      end
+      class_eval{define_method(name,&block)}
     end
   
     def initialize
@@ -36,10 +30,10 @@ module TestSweet
     def browser=(val)
       if @__parent && !@__parent.respond_to?(:browser)
         class << @__parent
-          define_method(:browser) do
-            val
-          end
+          attr_accessor :browser
         end
+        
+        @__parent.browser = val
       end
       
       @browser = val

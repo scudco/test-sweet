@@ -5,12 +5,8 @@ need{'filter_error'}
 
 module TestSweet
   class Page
-    def self.inherited klass
-      klass.class_eval do
-        include BlockChainable
-      end
-    end
-  
+    include BlockChainable
+      
     def initialize
       # build methods for elements
       self.class.elements.each do |element,block|
@@ -50,14 +46,18 @@ module TestSweet
       elements[name] = block
     end
     
+    def self.elements hash=nil
+      if hash
+        hash.each{|key,val| elements[key] = val}
+      else
+        return @elements ||= {}
+      end
+    end
+    
     private
     
     def self.filters
       @filters ||= {}
-    end
-    
-    def self.elements
-      @elements ||= {}
     end
   end
 end

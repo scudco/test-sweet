@@ -5,10 +5,10 @@ module TestSweet
   APPLICATION_ROOT = File.expand_path(File.join(File.dirname(__FILE__),'..'))
   
   class Site
-    # implement start_browser to create your browser instance. It should store
-    # instance in @browser. Use values in @environment to initialize it.
+    # implement start_browser to create your browser instance. It should assign
+    # the instance using self.browser = instance. See below for trivial example.
     def start_browser
-      @browser = Struct.new(:url).new(@environment['url'])
+      self.browser = Struct.new(:url).new(environment['url'])
       start_page
     end
     

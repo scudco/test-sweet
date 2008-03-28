@@ -30,7 +30,7 @@ module TestSweet
       @app_root = File.join(CURRENT_DIR,@name)
       
       if File.exists? @app_root
-        puts "Directory #{@name} exists: please pick another name"
+        puts "directory #{@name} exists: please pick another name"
       else
         generate_skeleton
         copy_files

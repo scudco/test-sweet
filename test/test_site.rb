@@ -36,6 +36,20 @@ class TestSite < Test::Unit::TestCase
     assert_equal :test, FooSite.new.return_me(:test)
   end
   
+  def test_browser_presists_across_sites
+    FooSite.any_instance.stubs(:load_pages)
+    FooSite.any_instance.stubs(:load_flows)
+    FooSite.any_instance.stubs(:load_config)
+    
+    FooSite do
+      self.browser = :foo
+    end
+    
+    FooSite do
+      assert_equal :foo, self.browser
+    end
+  end
+  
   def test_load_pages
     FooSite.any_instance.stubs(:load_flows)
     FooSite.any_instance.stubs(:load_config)
