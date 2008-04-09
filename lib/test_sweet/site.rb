@@ -9,7 +9,7 @@ module TestSweet
     
     attr_reader :environment
 
-    def self.flow name,&block
+    def self.flow(name,&block)
       class_eval{define_method(name,&block)}
     end
   
@@ -49,14 +49,17 @@ module TestSweet
       load_files 'flows'
     end
     
-    def load_files dir
+    def load_files(dir)
       Dir.glob(File.join(APPLICATION_ROOT,dir,Inflector.underscore(self.class.to_s),'**','*.rb')) do |page_file|
         require page_file
       end
     end
     
     def load_config
-      yaml_file = File.join(APPLICATION_ROOT,'config',Inflector.underscore(self.class.to_s),"#{ENV['config'] || "default"}.yaml")
+      yaml_file = File.join(APPLICATION_ROOT,
+                            'config',
+                            Inflector.underscore(self.class.to_s),
+                            "#{ENV['config'] || "default"}.yaml")
       
       if File.exist? yaml_file
         @environment = YAML::load(File.read(yaml_file))

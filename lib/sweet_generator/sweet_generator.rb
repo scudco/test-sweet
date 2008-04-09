@@ -22,7 +22,7 @@ module TestSweet
       'application.rb' => File.join('lib','application.rb')
     }
     
-    def initialize name
+    def initialize(name)
       @name = name
     end
   
@@ -63,12 +63,12 @@ module TestSweet
       end
     end
     
-    def make_dir dir
+    def make_dir(dir)
       puts "creating directory: #{File.expand_path(File.join(@app_root,dir))}"
       FileUtils.mkdir_p(File.join(@app_root,dir))
     end
     
-    def copy_file source,destination
+    def copy_file(source,destination)
       files_dir = File.join(File.dirname(__FILE__),'files')
       
       puts "creating file: #{File.join(@app_root,destination)}"

@@ -6,7 +6,7 @@ need{'sweet_destroyer'}
 
 module TestSweet
   class SpecDestroyer < SweetDestroyer
-    def initialize *args
+    def initialize(*args)
       @site,@name = args
 
       unless @site && @name

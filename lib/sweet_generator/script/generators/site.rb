@@ -7,7 +7,7 @@ need{'sweet_generator'}
 
 module TestSweet
   class SiteGenerator < SweetGenerator
-    def initialize *args
+    def initialize(*args)
       @name = args[0]
       @default_config = {}
       
@@ -54,7 +54,7 @@ class #{Inflector.camelize(@name)} < TestSweet::Site; end
     
     private
     
-    def parse_configuration_arguments args
+    def parse_configuration_arguments(args)
       args.each do |arg|
         @default_config[arg[/^(\w+):(.+)\Z/,1]] = arg[/^(\w+):(.+)\Z/,2]
       end

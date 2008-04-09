@@ -7,7 +7,7 @@ need{'sweet_generator'}
 
 module TestSweet
   class FlowGenerator < SweetGenerator
-    def initialize *args
+    def initialize(*args)
       @site, @name = args
 
       unless @site && @name

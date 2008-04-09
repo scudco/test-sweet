@@ -7,6 +7,28 @@ module TestSweet
   class Page
     include BlockChainable
       
+    def self.filter(*elements,&block)
+      elements.each do |element|
+        (filters[element] ||= []) << block
+      end
+    end
+    
+    def self.element(name,&block)
+      elements[name] = block
+    end
+    
+    def self.elements(hash=nil)
+      if hash
+        hash.each{|key,val| elements[key] = val}
+      else
+        @elements ||= {}
+      end
+    end
+    
+    def self.filters
+      @filters ||= {}
+    end
+      
     def initialize
       # build methods for elements
       self.class.elements.each do |element,block|
@@ -14,7 +36,7 @@ module TestSweet
           define_method("__#{element}_block",&block)
           
           define_method(element) do |*args|
-            if (self.class.filters[element].to_a + self.class.filters[:all].to_a).all?{|filter| instance_eval(&filter)}
+            if (self.class.filters[:all].to_a + self.class.filters[element].to_a).all?{|filter| instance_eval(&filter)}
               self.send("__#{element}_block",*args)
             else
               raise FilterError, "All filters for #{element} did not return true"
@@ -30,34 +52,6 @@ module TestSweet
     
     def environment
       @environment ||= @__parent.environment
-    end
-    
-    def self.filter *args,&block
-      args.each do |element|
-        if filters[element]
-          filters[element] << block
-        else
-          filters[element] = [block]
-        end
-      end
-    end
-    
-    def self.element name,&block
-      elements[name] = block
-    end
-    
-    def self.elements hash=nil
-      if hash
-        hash.each{|key,val| elements[key] = val}
-      else
-        return @elements ||= {}
-      end
-    end
-    
-    private
-    
-    def self.filters
-      @filters ||= {}
     end
   end
 end
