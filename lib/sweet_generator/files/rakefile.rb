@@ -5,6 +5,7 @@ require 'ci/reporter/rake/test_unit'
 require 'rake/testtask'
 require 'spec/rake/spectask'
 require 'fileutils'
+require 'test_sweet/tag_filter'
 
 desc 'Run current release functional tests'
 task :test => ['test:release']
@@ -16,7 +17,17 @@ namespace :test do
   desc 'Run current release functional tests'
   Rake::TestTask.new(:release) do |t|
     app = ENV['app']
-    t.test_files = FileList["next_release/**/#{app+'/**/' if app}test*.rb"]
+    tags = ENV['tag']
+    
+    file_pattern = "next_release/**/#{app+'/**/' if app}test*.rb"
+    
+    if tags
+      tags = tags.split(',')
+      t.test_files = TestSweet::TagFilter.filter(file_pattern,tags)
+    else
+      t.test_files = FileList[file_pattern]
+    end
+    
     t.verbose = true
   end
   
@@ -24,7 +35,17 @@ namespace :test do
   Rake::TestTask.new(:regression) do |t|
     app = ENV['app']
     release = ENV['release']
-    t.test_files = FileList["regression/**/#{release+'/**/' if release}#{app+'/**/' if app}test*.rb"]
+    tags = ENV['tag']
+    
+    file_pattern = "regression/**/#{release+'/**/' if release}#{app+'/**/' if app}test*.rb"
+    
+    if tags
+      tags = tags.split(',')
+      t.test_files = TestSweet::TagFilter.filter(file_pattern,tags)
+    else
+      t.test_files = FileList[file_pattern]
+    end
+    
     t.verbose = true
   end
 end
@@ -32,8 +53,18 @@ end
 namespace :spec do
   desc 'Run current release functional specs'
   Spec::Rake::SpecTask.new(:release) do |t|
-    app = ENV['app']
-    t.spec_files = FileList["next_release/**/#{app+'/**/' if app}*spec.rb"]
+    app = ENV['app']    
+    tags = ENV['tag']
+    
+    file_pattern = "next_release/**/#{app+'/**/' if app}*spec.rb"
+    
+    if tags
+      tags = tags.split(',')
+      t.spec_files = TestSweet::TagFilter.filter(file_pattern,tags)
+    else
+      t.spec_files = FileList[file_pattern]
+    end
+    
     t.verbose = true
   end
   
@@ -41,7 +72,17 @@ namespace :spec do
   Spec::Rake::SpecTask.new(:regression) do |t|
     app = ENV['app']
     release = ENV['release']
-    t.spec_files = FileList["regression/**/#{release+'/**/' if release}#{app+'/**/' if app}*spec.rb"]
+    tags = ENV['tag']
+    
+    file_pattern = "regression/**/#{release+'/**/' if release}#{app+'/**/' if app}*spec.rb"
+    
+    if tags
+      tags = tags.split(',')
+      t.spec_files = TestSweet::TagFilter.filter(file_pattern,tags)
+    else
+      t.spec_files = FileList[file_pattern]
+    end
+    
     t.verbose = true
   end
 end

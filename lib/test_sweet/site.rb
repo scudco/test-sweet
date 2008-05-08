@@ -39,6 +39,12 @@ module TestSweet
       @browser = val
     end
     
+    def site_data(*names)
+      names.each do |name|
+        eval("#{name.call} = nil",name)
+      end
+    end
+    
     private
     
     def load_pages

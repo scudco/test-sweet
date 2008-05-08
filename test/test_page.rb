@@ -18,8 +18,8 @@ class SomePage < TestSweet::Page
     :test_false
   end
   
-  elements :return_me => proc{|val| val},
-           :call_helper => proc{helper}
+  elements :return_me => proc { |val| val },
+           :call_helper => proc { helper }
   
   filter :a, :b do
     "foo"

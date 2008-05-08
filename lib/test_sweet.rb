@@ -2,6 +2,7 @@ require 'rubygems'
 require 'need'
 need{'test_sweet/page'}
 need{'test_sweet/site'}
+need{'test_sweet/tag'}
 need{'test_sweet/filter_error'}
 
 module TestSweet
