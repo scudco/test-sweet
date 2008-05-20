@@ -11,7 +11,7 @@ module TestSweet
       
       def contains_tags?(file_name,tags)
         file_string = File.open(file_name).read
-        tags.all? { |tag| file_string =~ /TestSweet\.tag( :\w+,)* :#{tag}( :\w+,)*/ }
+        tags.all? { |tag| file_string =~ /#\s?tags:(\s?\w+,)* #{tag},?(\s?\w+,)*/ }
       end
     end
   end

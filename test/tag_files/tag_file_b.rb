@@ -1,1 +1,1 @@
-TestSweet.tag :b
+#tags: b

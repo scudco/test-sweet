@@ -10,7 +10,7 @@ module TestSweet
     attr_reader :environment
 
     def self.flow(name,&block)
-      class_eval{define_method(name,&block)}
+      self.send(:define_method,name,&block)
     end
   
     def initialize
