@@ -24,7 +24,7 @@ module TestSweet
         remove_file site_file
       end
 
-      ['pages','config','flows'].each do |dir|
+      ['pages','config','flows','application_tests'].each do |dir|
         remove_dir File.join(file_dir,'..','..',dir,Inflector.underscore(@name))
       end
     end

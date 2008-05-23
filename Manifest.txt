@@ -26,7 +26,6 @@ lib/test_sweet.rb
 lib/test_sweet/filter_error.rb
 lib/test_sweet/page.rb
 lib/test_sweet/site.rb
-lib/test_sweet/tag.rb
 lib/test_sweet/tag_filter.rb
 test/config/foo_site/default.yaml
 test/config/foo_site/foo.yaml
@@ -37,5 +36,4 @@ test/tag_files/tag_file_a_b.rb
 test/tag_files/tag_file_b.rb
 test/test_page.rb
 test/test_site.rb
-test/test_tag.rb
 test/test_tag_filter.rb

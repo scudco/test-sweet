@@ -17,7 +17,7 @@ module TestSweet
     def generate
       file_dir = File.expand_path(File.dirname(__FILE__))
 
-      spec_dir = File.join(file_dir,'..','..','next_release',@site)
+      spec_dir = File.join(file_dir,'..','..','application_tests',@site)
 
       unless File.exist? spec_dir
         raise ArgumentError, 'the specified site does not exist'

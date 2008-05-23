@@ -11,6 +11,7 @@ Hoe.new('test_sweet', TestSweet::VERSION) do |p|
   p.extra_deps << ['rspec', '>= 1.1.3']
   p.extra_deps << ['block-chainable', '>= 0.0.3']
   p.extra_deps << ['ci_reporter', '>= 1.5.1']
+  p.extra_deps << ['activesupport', '>= 2.0.2']
 end
 
 # vim: syntax=Ruby

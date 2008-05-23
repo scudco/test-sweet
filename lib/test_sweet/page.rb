@@ -32,15 +32,13 @@ module TestSweet
     def initialize
       # build methods for elements
       self.class.elements.each do |element,block|
-        self.class.class_eval do
-          define_method("__#{element}_block",&block)
-          
-          define_method(element) do |*args|
-            if (self.class.filters[:all].to_a + self.class.filters[element].to_a).all?{|filter| instance_eval(&filter)}
-              self.send("__#{element}_block",*args)
-            else
-              raise FilterError, "All filters for #{element} did not return true"
-            end
+        self.class.send(:define_method,"__#{element}_block",&block)
+        
+        self.class.send(:define_method,element) do |*args|
+          if (self.class.filters[:all].to_a + self.class.filters[element].to_a).all?{|filter| instance_eval(&filter)}
+            self.send("__#{element}_block",*args)
+          else
+            raise FilterError, "All filters for #{element} did not return true"
           end
         end
       end

@@ -35,7 +35,7 @@ require 'test_sweet'
 class #{Inflector.camelize(@name)} < TestSweet::Site; end
       EOS
       
-      ['pages','flows','config','next_release'].each do |dir|
+      ['pages','flows','config','application_tests'].each do |dir|
         site_dir = File.join(file_dir,'..','..',dir,"#{Inflector.underscore(@name)}")
 
         unless File.exist? site_dir

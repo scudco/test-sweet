@@ -5,15 +5,16 @@ module TestSweet
     CURRENT_DIR = File.expand_path('.')
     
     APP_SKELETON = %w(
+      application_tests
       config
       flows
       lib
-      next_release
+      log
       pages
-      regression
       script
       sites
-      log
+      spec
+      test
       tmp
     )
     
