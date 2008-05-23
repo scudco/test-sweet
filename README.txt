@@ -12,7 +12,8 @@ FIX (describe your package)
 
 == SYNOPSIS:
 
-  FIX (code sample of usage)
+  To create a new test project, open a command prompt and type 'sweet <application name>'. 
+  test sweet will generate a basic skeleton structure to use for your application tests. 
 
 == REQUIREMENTS:
 * rspec or test::unit to run tests
