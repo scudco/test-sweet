@@ -1,6 +1,6 @@
 = test_sweet
 
-* FIX (url)
+* http://rubyforge.org/projects/test-sweet/
 
 == DESCRIPTION:
 
@@ -15,12 +15,17 @@ FIX (describe your package)
   FIX (code sample of usage)
 
 == REQUIREMENTS:
-
-* FIX (list of requirements)
+* rspec or test::unit to run tests
+* need
+* block-chainable
+* ci_reporter
+* activesupport
+* mocha(optional) to run the unit tests
 
 == INSTALL:
 
-* sudo gem install test-sweet
+* sudo gem install test-sweet on OS X
+* gem install on Windows
 
 == LICENSE:
 
