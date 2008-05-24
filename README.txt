@@ -4,7 +4,21 @@
 
 == DESCRIPTION:
 
-FIX (describe your package)
+ Test Sweet is a framework for building and maintaining functional test suites written
+ in ruby. It works on the principle of convention over configuration popularized
+ by Rails. This enables testers to get started writing tests quickly and enforces 
+ naming and directory hierarchy standards that help understanding by creating a
+ uniform base. 
+
+ The framework itself, through the use of generators is responsible for creating 
+ the classes and structure necessary to support your tests. Test Sweet comes with 
+ out of the box support for both RSpec and Test::Unit. 
+
+ Tests can be set to run with Watir, FireWatir or Selenium RC. Test Sweet supports 
+ filtering tests based on user specified tags. Test results are created with
+ ci_reporter as xml artifacts which can be picked up by Cruise Control or other
+ Continuous Integration servers.
+
 
 == FEATURES/PROBLEMS:
 
@@ -13,7 +27,8 @@ FIX (describe your package)
 == SYNOPSIS:
 
   To create a new test project, open a command prompt and type 'sweet <application name>'. 
-  test sweet will generate a basic skeleton structure to use for your application tests. 
+  Test Sweet will generate a basic skeleton structure to use for your application tests
+  in the directory where you've run the command. 
 
 == REQUIREMENTS:
 * rspec or test::unit to run tests
